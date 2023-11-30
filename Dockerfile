@@ -3,4 +3,5 @@ ARG TARGETARCH
 
 FROM rspamd/rbldnsd:build AS build
 
-RUN	ls -la
+RUN	rm rbldnsd.c
+RUN	rm yolo.swag
