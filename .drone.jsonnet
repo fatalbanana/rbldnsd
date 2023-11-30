@@ -1,4 +1,5 @@
 local BUILD_IMAGE_TAG = 'build';
+local DEBIAN_VERSION = 'bookworm';
 local IMAGE = 'rspamd/rbldnsd';
 
 local docker_pipeline = {
@@ -41,6 +42,15 @@ local ci_pipeline(arch) = {
   },
 } + docker_pipeline + platform(arch);
 
+local docker_defaults = {
+  username: {
+    from_secret: 'docker_username',
+  },
+  password: {
+    from_secret: 'docker_password',
+  },
+};
+
 local trigger_on_tag = {
   trigger: {
     event: {
@@ -53,15 +63,17 @@ local trigger_on_tag = {
 
 local dockerbuild_pipeline(arch) = {
   name: 'docker-' + arch,
-  steps: [
-    {
-      name: 'test',
-      image: std.format('%s:%s', [IMAGE, BUILD_IMAGE_TAG]),
-      commands: [
-        
-      ],
-    },
-  ],
+  image: 'plugins/docker',
+  settings: {
+    dockerfile: 'Dockerfile',
+    dry_run: true,
+    build_args: [
+      'TARGETARCH=' + arch,
+    ],
+    tags: [
+      'latest-' + arch,
+    ],
+  } + docker_defaults,
 } + docker_pipeline + platform(arch) + trigger_on_tag;
 
 /*
