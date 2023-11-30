@@ -63,17 +63,22 @@ local trigger_on_tag = {
 
 local dockerbuild_pipeline(arch) = {
   name: 'docker-' + arch,
-  image: 'plugins/docker',
-  settings: {
-    dockerfile: 'Dockerfile',
-    dry_run: true,
-    build_args: [
-      'TARGETARCH=' + arch,
-    ],
-    tags: [
-      'latest-' + arch,
-    ],
-  } + docker_defaults,
+  steps: [
+    {
+      name: 'docker-' + arch,
+      image: 'plugins/docker',
+      settings: {
+        dockerfile: 'Dockerfile',
+        dry_run: true,
+        build_args: [
+          'TARGETARCH=' + arch,
+        ],
+        tags: [
+          'latest-' + arch,
+        ],
+      } + docker_defaults,
+    },
+  ],
 } + docker_pipeline + platform(arch) + trigger_on_tag;
 
 /*

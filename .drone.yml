@@ -68,29 +68,34 @@
 }
 ---
 {
-   "image": "plugins/docker",
    "kind": "pipeline",
    "name": "docker-amd64",
    "platform": {
       "arch": "amd64",
       "os": "linux"
    },
-   "settings": {
-      "build_args": [
-         "TARGETARCH=amd64"
-      ],
-      "dockerfile": "Dockerfile",
-      "dry_run": true,
-      "password": {
-         "from_secret": "docker_password"
-      },
-      "tags": [
-         "latest-amd64"
-      ],
-      "username": {
-         "from_secret": "docker_username"
+   "steps": [
+      {
+         "image": "plugins/docker",
+         "name": "docker-amd64",
+         "settings": {
+            "build_args": [
+               "TARGETARCH=amd64"
+            ],
+            "dockerfile": "Dockerfile",
+            "dry_run": true,
+            "password": {
+               "from_secret": "docker_password"
+            },
+            "tags": [
+               "latest-amd64"
+            ],
+            "username": {
+               "from_secret": "docker_username"
+            }
+         }
       }
-   },
+   ],
    "trigger": {
       "event": {
          "include": [
@@ -102,29 +107,34 @@
 }
 ---
 {
-   "image": "plugins/docker",
    "kind": "pipeline",
    "name": "docker-arm64",
    "platform": {
       "arch": "arm64",
       "os": "linux"
    },
-   "settings": {
-      "build_args": [
-         "TARGETARCH=arm64"
-      ],
-      "dockerfile": "Dockerfile",
-      "dry_run": true,
-      "password": {
-         "from_secret": "docker_password"
-      },
-      "tags": [
-         "latest-arm64"
-      ],
-      "username": {
-         "from_secret": "docker_username"
+   "steps": [
+      {
+         "image": "plugins/docker",
+         "name": "docker-arm64",
+         "settings": {
+            "build_args": [
+               "TARGETARCH=arm64"
+            ],
+            "dockerfile": "Dockerfile",
+            "dry_run": true,
+            "password": {
+               "from_secret": "docker_password"
+            },
+            "tags": [
+               "latest-arm64"
+            ],
+            "username": {
+               "from_secret": "docker_username"
+            }
+         }
       }
-   },
+   ],
    "trigger": {
       "event": {
          "include": [
