@@ -68,7 +68,56 @@
 }
 ---
 {
-   "hmac": "6ee32e221e78ba085962f88df05d4424e4cd960933ff437276e8e65aecfa7322",
+   "kind": "pipeline",
+   "name": "docker-amd64",
+   "platform": {
+      "arch": "amd64",
+      "os": "linux"
+   },
+   "steps": [
+      {
+         "commands": [ ],
+         "image": "rspamd/rbldnsd:build",
+         "name": "test"
+      }
+   ],
+   "trigger": {
+      "event": {
+         "include": [
+            "tag"
+         ]
+      }
+   },
+   "type": "docker"
+}
+---
+{
+   "kind": "pipeline",
+   "name": "docker-arm64",
+   "platform": {
+      "arch": "arm64",
+      "os": "linux"
+   },
+   "steps": [
+      {
+         "commands": [ ],
+         "image": "rspamd/rbldnsd:build",
+         "name": "test"
+      }
+   ],
+   "trigger": {
+      "event": {
+         "include": [
+            "tag"
+         ]
+      }
+   },
+   "type": "docker"
+
+}
+---
+{
+   "hmac": "0000000000000000000000000000000000000000000000000000000000000000",
    "kind": "signature"
 }
 ...
