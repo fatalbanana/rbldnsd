@@ -23,6 +23,6 @@ jobs:
           cmake -DNO_IPv6=ON $GITHUB_WORKSPACE/src
           make
           cd $GITHUB_WORKSPACE
-          mv ../build.rbldnsd/rbldnsd* .
+          mv build.rbldnsd/rbldnsd* .
           bash -c "source /venv/bin/activate && robot test/functional/cases"
           bash -c "source /venv/bin/activate && python3 test/pyunit/tests.py"
